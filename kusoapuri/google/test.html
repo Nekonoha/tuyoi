@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+	<title>出るまでくり返すやつ</title>
+
+
+	<script>
+		var count = 0;
+		var input;
+		var limit = 25000;
+
+		function turai() {
+			var str = "";
+			input = document.text.in.value;
+			count = 0;
+			while (str.indexOf(input) == -1) {
+				var rnd = Math.random() * (input.length + 1);
+				var index_num = Math.floor(rnd);
+				str += input.charAt(index_num);
+				count++;
+				if (count > limit) {
+					break;
+				}
+			}
+			document.text.out.value = str;
+		}
+
+		function turakunai() {
+			if (count == 0) {
+				window.open("https://twitter.com/intent/tweet?text=" + "値を入力しないでツイートしました！私は悪い子です。" + "出るまで繰り返す奴" + "&url=https://goo.gl/dmrxgH", "_blank");
+			} else if (count <= limit) {
+				window.open("https://twitter.com/intent/tweet?text=" + count + "文字目で" + input + "を完成させた！" + "出るまで繰り返す奴" + "&url=https://goo.gl/dmrxgH", "_blank");
+			} else if (count > limit) {
+				window.open("https://twitter.com/intent/tweet?text=" + limit + "文字目までに" + input + "を完成できませんでした…" + "出るまで繰り返す奴" + "&url=https://goo.gl/dmrxgH", "_blank");
+			}
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<h1 align="center">出るまで繰り返す奴</h1>
+	<div align="center">
+		<form name="text" method="post">
+			<textarea name="in" rows="1" cols="20" placeholder="ここに文字列を入力"></textarea>
+			<input type="button" value="submit" onclick="turai()">
+			<br>
+			<textarea name="out" rows="20" cols="30" placeholder="結果"></textarea>
+		</form>
+		<br>
+		<form>
+			<input type="button" value="Tweet" onclick="turakunai()">
+		</form>
+		<br>
+		<address>- made by <a href="https://twitter.com/tan_fantazma" target="_blank">@tan_fantazma</a> -</address>
+	</div>
+
+</body>
+
+</html>
