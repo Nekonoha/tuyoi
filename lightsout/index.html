@@ -2,26 +2,68 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>LightsOut</title>
-<script src="./main.js"></script>
-<style>
-	
-</style>
+<script>
+	function create() {
+		var table = document.getElementById('sheet');
+
+		for (var i = 0; i < table.rows.length; i++) {
+			for (var j = 0; j < table.rows[0].cells.length; j++) {
+				table.rows[i].cells[j].firstChild.data = Math.floor(Math.random() * 2);
+			}
+		}
+		console.log(a);
+	}
+
+	function calc(row, col) {
+		var table = document.getElementById('sheet');
+
+		if (table.rows[row].cells[col].firstChild.data == 1) {
+			table.rows[row].cells[col].firstChild.data = 0;
+		} else if (table.rows[row].cells[col].firstChild.data == 0) {
+			table.rows[row].cells[col].firstChild.data = 1;
+		} else {
+
+		}
+		//alert(row + "" + col);
+	}
+
+	function hantei(row, col) {
+		var table = document.getElementById('sheet');
+		calc(row, col);
+		if (row - 1 >= 0) {
+			calc(row - 1, col);
+		}
+		if (row + 1 <= table.rows.length) {
+			calc(row + 1, col);
+		}
+		if (col - 1 >= 0) {
+			calc(row, col - 1);
+		}
+		if (col + 1 <= table.rows[0].cells.length) {
+			calc(row, col + 1);
+		}
+
+	}
+
+</script>
+<form>
+	<input type="button" value="create" onclick="create()">
+</form>
 <table border="1" id="sheet">
 	<tr>
-		<td>(0,0)</td>
-		<td>(1,0)</td>
-		<td>(2,0)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(0,0)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(1,0)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(2,0)</td>
 	</tr>
 	<tr>
-		<td>(0,1)</td>
-		<td>(1,1)</td>
-		<td>(2,1)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(0,1)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(1,1)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(2,1)</td>
 	</tr>
 	<tr>
-		<td>(0,2)</td>
-		<td>(1,2)</td>
-		<td>(2,2)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(0,2)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(1,2)</td>
+		<td onclick="hantei(this.parentNode.rowIndex,this.cellIndex)">(2,2)</td>
 	</tr>
+
 </table>
-
-
